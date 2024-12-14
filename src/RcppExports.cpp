@@ -341,6 +341,25 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// zcurve_EM_PL_RCpp
+List zcurve_EM_PL_RCpp(NumericVector x, NumericVector mu, NumericVector sigma, NumericVector theta, double a, double b, double sig_level, int max_iter, double criterion);
+RcppExport SEXP _zcurve_zcurve_EM_PL_RCpp(SEXP xSEXP, SEXP muSEXP, SEXP sigmaSEXP, SEXP thetaSEXP, SEXP aSEXP, SEXP bSEXP, SEXP sig_levelSEXP, SEXP max_iterSEXP, SEXP criterionSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type mu(muSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type sigma(sigmaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< double >::type a(aSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< double >::type sig_level(sig_levelSEXP);
+    Rcpp::traits::input_parameter< int >::type max_iter(max_iterSEXP);
+    Rcpp::traits::input_parameter< double >::type criterion(criterionSEXP);
+    rcpp_result_gen = Rcpp::wrap(zcurve_EM_PL_RCpp(x, mu, sigma, theta, a, b, sig_level, max_iter, criterion));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_zcurve_zdist_lpdf", (DL_FUNC) &_zcurve_zdist_lpdf, 5},
@@ -360,6 +379,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_zcurve_zcurve_EMc_start_fast_RCpp", (DL_FUNC) &_zcurve_zcurve_EMc_start_fast_RCpp, 15},
     {"_zcurve_zcurve_EMc_boot_fast_RCpp", (DL_FUNC) &_zcurve_zcurve_EMc_boot_fast_RCpp, 13},
     {"_zcurve_zcurve_EMc_boot_fast_w_RCpp", (DL_FUNC) &_zcurve_zcurve_EMc_boot_fast_w_RCpp, 15},
+    {"_zcurve_zcurve_EM_PL_RCpp", (DL_FUNC) &_zcurve_zcurve_EM_PL_RCpp, 9},
     {NULL, NULL, 0}
 };
 

@@ -69,3 +69,7 @@
     .Call(`_zcurve_zcurve_EMc_boot_fast_w_RCpp`, x, x_w, lb, ub, b_w, indx, mu, sigma, theta, a, b, sig_level, bootstrap, max_iter, criterion)
 }
 
+.zcurve_EM_PL_RCpp <- function(x, mu, sigma, theta, a, b, sig_level, max_iter, criterion) {
+    .Call(`_zcurve_zcurve_EM_PL_RCpp`, x, mu, sigma, theta, a, b, sig_level, max_iter, criterion)
+}
+

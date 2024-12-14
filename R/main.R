@@ -72,7 +72,7 @@
 #' @seealso [summary.zcurve()], [plot.zcurve()], [control_EM], [control_density]
 zcurve       <- function(z, z.lb, z.ub, p, p.lb, p.ub, data, method = "EM", bootstrap = 1000, parallel = FALSE, control = NULL){
   
-  if(!method %in% c("EM", "density"))
+  if(!method %in% c("EM", "density", "EM_PL"))
     stop("Wrong method, select a supported option")
   
   # set bootstrap
@@ -128,6 +128,8 @@ zcurve       <- function(z, z.lb, z.ub, p, p.lb, p.ub, data, method = "EM", boot
     control <- .zcurve_EM.control(control)
   }else if(method == "density"){
     control <- .zcurve_density.control(control)
+  }else if(method == "EM_PL"){
+    control <- .zcurve_EM_PL.control(control)
   }
   
   ### prepare data
@@ -256,12 +258,17 @@ zcurve       <- function(z, z.lb, z.ub, p, p.lb, p.ub, data, method = "EM", boot
     fit <- .zcurve_EM(z = object$data, lb = object$data_censoring$lb, ub = object$data_censoring$ub, control = control)
   }else if(method == "density"){
     fit <- .zcurve_density(z = object$data, control = control)
+  }else if(method == "EM_PL"){
+    fit <- .zcurve_EM_PL(z = object$data, control = control)
   }
+
   object$fit <- fit
   
   
   # check convergence
   if(method == "EM"){
+    object$converged <- ifelse(fit$iter < control$max_iter, TRUE, FALSE)
+  }else if(method == "EM_PL"){
     object$converged <- ifelse(fit$iter < control$max_iter, TRUE, FALSE)
   }else if(method == "density"){
     object$converged <- fit$converged
